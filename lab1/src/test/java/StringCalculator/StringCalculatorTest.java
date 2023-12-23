@@ -61,4 +61,11 @@ public class StringCalculatorTest
         Exception e = Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.add("-1,2,22,-5,6,-72"));
         Assertions.assertEquals("Unsupported negative numbers. [-1, -5, -72] were passed", e.getMessage(), () -> "Exception message doesn't match expected one");
     }
+
+    @Test
+    void testWithIgnoringNumbersGreaterThanThousand()
+    {
+        int common = calculator.add("1000,1001,999");
+        Assertions.assertEquals(1999, common);
+    }
 }

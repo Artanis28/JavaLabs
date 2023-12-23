@@ -22,13 +22,7 @@ public class StringCalculator
 
         checkForNegativeNumbers(nums);
 
-        int sum = 0;
-        for(String num : nums)
-        {
-            sum += Integer.parseInt(num);
-        }
-
-        return sum;
+        return sumUpNumbersWithIgnoreMoreThanThousand(nums);
     }
 
     private String replaceDelimitersWithComma(String str)
@@ -59,5 +53,19 @@ public class StringCalculator
         {
             throw new IllegalArgumentException("Unsupported negative numbers. %s were passed".formatted(negativeNumbers.toString()));
         }
+    }
+
+    private int sumUpNumbersWithIgnoreMoreThanThousand(String[] numbers)
+    {
+        int sum = 0;
+        for(String number : numbers)
+        {
+            int num = Integer.parseInt(number);
+            if (num <= 1000)
+            {
+                sum += num;
+            }
+        }
+        return sum;
     }
 }
