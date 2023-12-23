@@ -38,7 +38,7 @@ public class StringCalculatorTest
     void throwIllegalArgumentExceptionIfDelimiterStandingNearbyAnotherDelimiter()
     {
         Exception e = Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.add("2,22\n,52"));
-        Assertions.assertEquals("There are two delimiters standing nearby", e.getMessage(), () -> "Exception message doesn't match expected one");
+        Assertions.assertEquals("Two delimiters standing nearby", e.getMessage(), () -> "Exception message doesn't match expected one");
     }
 
     @Test
@@ -80,7 +80,7 @@ public class StringCalculatorTest
     void throwIllegalArgumentExceptionIfDelimiterFollowByAnotherDelimiterAndSomeOfThemIsCustom()
     {
         Exception e = Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.add("//[++]\n1++22,34++2++,8"));
-        Assertions.assertEquals("There are two delimiters following one by another", e.getMessage(), () -> "Exception message doesn't match expected one");
+        Assertions.assertEquals("Two delimiters standing nearby", e.getMessage(), () -> "Exception message doesn't match expected one");
     }
 
     @Test
