@@ -1,5 +1,8 @@
 package StringCalculator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringCalculator
 {
     public int add(String numbers) throws IllegalArgumentException
@@ -16,6 +19,8 @@ public class StringCalculator
         }
 
         String[] nums = numbers.split(",");
+
+        checkForNegativeNumbers(nums);
 
         int sum = 0;
         for(String num : nums)
@@ -35,5 +40,24 @@ public class StringCalculator
         }
 
         return str.replace('\n', ',');
+    }
+
+    private void checkForNegativeNumbers(String[] numbers) throws IllegalArgumentException
+    {
+        List<Integer> negativeNumbers = new ArrayList<>();
+        for(String number : numbers)
+        {
+            int num = Integer.parseInt(number);
+
+            if(num < 0)
+            {
+                negativeNumbers.add(num);
+            }
+        }
+
+        if(!negativeNumbers.isEmpty())
+        {
+            throw new IllegalArgumentException("Unsupported negative numbers. %s were passed".formatted(negativeNumbers.toString()));
+        }
     }
 }
