@@ -9,7 +9,7 @@ public class StringCalculator
             return 0;
         }
 
-        numbers = numbers.replace('\n', ',');
+        numbers = replaceDelimitersWithComma(numbers);
         if(numbers.contains(",,"))
         {
             throw new IllegalArgumentException("Two delimiters standing nearby");
@@ -24,5 +24,16 @@ public class StringCalculator
         }
 
         return sum;
+    }
+
+    private String replaceDelimitersWithComma(String str)
+    {
+        if(str.startsWith("//"))
+        {
+            char customDelimiter = str.charAt(2);
+            return str.replace('\n', ',').replace(customDelimiter, ',').substring(4);
+        }
+
+        return str.replace('\n', ',');
     }
 }

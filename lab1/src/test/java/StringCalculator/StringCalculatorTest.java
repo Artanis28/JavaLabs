@@ -40,4 +40,18 @@ public class StringCalculatorTest
         Exception e = Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.add("2,22\n,52"));
         Assertions.assertEquals("There are two delimiters standing nearby", e.getMessage(), () -> "Exception message doesn't match expected one");
     }
+
+    @Test
+    void testCustomDelimiter()
+    {
+        int common = calculator.add("//;\n1;2");
+        Assertions.assertEquals(3, common);
+    }
+
+    @Test
+    void testCustomDelimiterWithDefaultDelimiters()
+    {
+        int common = calculator.add("//+\n1+2,4\n1\n2");
+        Assertions.assertEquals(10, common);
+    }
 }
