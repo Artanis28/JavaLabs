@@ -11,11 +11,6 @@ public class StringCalculator
 
         String[] nums = numbers.split(",");
 
-        if(nums.length > 2)
-        {
-            throw new Error();
-        }
-
         int sum = 0;
         for(String num : nums)
         {
