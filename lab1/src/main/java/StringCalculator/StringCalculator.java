@@ -2,6 +2,7 @@ package StringCalculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
 public class StringCalculator
 {
@@ -35,9 +36,19 @@ public class StringCalculator
                 return str.substring(4).replace('\n', ',').replace(customDelimiter, ',');
             }
 
-            int delimiterEndIndex = str.indexOf("]\n");
-            String customDelimiter = str.substring(3, delimiterEndIndex);
-            return str.substring(delimiterEndIndex + 2).replace('\n', ',').replace(customDelimiter, ",");
+            Set<String> customDelimiters = extractDelimitersSet(str);
+            customDelimiters.add("\n");
+
+            int delimitersEndIndex = str.indexOf("]\n");
+
+            str = str.substring(delimitersEndIndex + 2);
+
+            for(String delimiter : customDelimiters)
+            {
+                str = str.replace(delimiter, ",");
+            }
+
+            return str;
         }
 
         return str.replace('\n', ',');
@@ -74,5 +85,20 @@ public class StringCalculator
             }
         }
         return sum;
+    }
+
+    private Set<String> extractDelimitersSet(String str)
+    {
+        Set<String> delimiters = new TreeSet<>(Comparator.reverseOrder());
+        int delimiterEndIndex = str.indexOf("]\n");
+        String[] customDelimiters = str.substring(3, delimiterEndIndex).split("]\\[");
+        for(String delimiter : customDelimiters)
+        {
+            if (delimiter.length() != 0)
+            {
+                delimiters.add(delimiter);
+            }
+        }
+        return delimiters;
     }
 }

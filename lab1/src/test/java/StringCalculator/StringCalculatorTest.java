@@ -82,4 +82,11 @@ public class StringCalculatorTest
         Exception e = Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.add("//[++]\n1++22,34++2++,8"));
         Assertions.assertEquals("There are two delimiters following one by another", e.getMessage(), () -> "Exception message doesn't match expected one");
     }
+
+    @Test
+    void testThreeCustomDelimitersEachConsistsOfOneCharacter()
+    {
+        int common = calculator.add("//[#][+][@]\n1+2@4#8");
+        Assertions.assertEquals(15, common);
+    }
 }
