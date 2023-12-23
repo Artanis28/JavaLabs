@@ -26,4 +26,18 @@ public class StringCalculatorTest
         int common = calculator.add("1,3");
         Assertions.assertEquals(4, common);
     }
+
+    @Test
+    void addThreeNumbersWithTwoDelimiters()
+    {
+        int common = calculator.add("3,8\n52");
+        Assertions.assertEquals(63, common);
+    }
+
+    @Test
+    void throwIllegalArgumentExceptionIfDelimiterStandingNearbyAnotherDelimiter()
+    {
+        Exception e = Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.add("2,22\n,52"));
+        Assertions.assertEquals("There are two delimiters standing nearby", e.getMessage(), () -> "Exception message doesn't match expected one");
+    }
 }
