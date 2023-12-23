@@ -68,4 +68,18 @@ public class StringCalculatorTest
         int common = calculator.add("1000,1001,999");
         Assertions.assertEquals(1999, common);
     }
+
+    @Test
+    void testCustomDelimiterThatConsistOfThreeCharacters()
+    {
+        int common = calculator.add("//[***]\n1***2***3");
+        Assertions.assertEquals(6, common);
+    }
+
+    @Test
+    void throwIllegalArgumentExceptionIfDelimiterFollowByAnotherDelimiterAndSomeOfThemIsCustom()
+    {
+        Exception e = Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.add("//[++]\n1++22,34++2++,8"));
+        Assertions.assertEquals("There are two delimiters following one by another", e.getMessage(), () -> "Exception message doesn't match expected one");
+    }
 }

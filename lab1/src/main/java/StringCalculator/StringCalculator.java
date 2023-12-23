@@ -29,8 +29,15 @@ public class StringCalculator
     {
         if(str.startsWith("//"))
         {
-            char customDelimiter = str.charAt(2);
-            return str.replace('\n', ',').replace(customDelimiter, ',').substring(4);
+            if(str.charAt(3) == '\n')
+            {
+                char customDelimiter = str.charAt(2);
+                return str.substring(4).replace('\n', ',').replace(customDelimiter, ',');
+            }
+
+            int delimiterEndIndex = str.indexOf("]\n");
+            String customDelimiter = str.substring(3, delimiterEndIndex);
+            return str.substring(delimiterEndIndex + 2).replace('\n', ',').replace(customDelimiter, ",");
         }
 
         return str.replace('\n', ',');
