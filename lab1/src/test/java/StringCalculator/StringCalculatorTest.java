@@ -89,4 +89,12 @@ public class StringCalculatorTest
         int common = calculator.add("//[#][+][@]\n1+2@4#8");
         Assertions.assertEquals(15, common);
     }
+
+    @Test
+    void testThreeCustomDelimitersEachConsistsOfMoreThanOneCharacter()
+    {
+        int common = calculator.add("//[##][+@][***]\n1+@2##4***8");
+        Assertions.assertEquals(15, common);
+    }
+
 }
